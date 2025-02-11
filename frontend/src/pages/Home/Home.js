@@ -12,7 +12,9 @@ const HomePage = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/images"); // Fetch from backend
+        const response = await axios.get(
+          "https://workportfolio-ngea.onrender.com/api/images"
+        ); // Fetch from backend
         setImages(response.data);
       } catch (error) {
         console.error("Error fetching images:", error);
@@ -44,7 +46,7 @@ const HomePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
             >
-              <Link to={`/image/${image._id}`}> 
+              <Link to={`/image/${image._id}`}>
                 <img src={image.url} alt={image.title} className="image-item" />
               </Link>
               <h3 className="image-title">{image.title}</h3>

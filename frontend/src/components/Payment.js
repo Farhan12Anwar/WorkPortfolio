@@ -19,7 +19,7 @@ const Payment = () => {
 
   const handlePayment = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/payment", {
+      const response = await axios.post("https://workportfolio-ngea.onrender.com/api/payment", {
         amount,
       });
       const { id, currency, amount: razorpayAmount } = response.data;
@@ -34,7 +34,7 @@ const Payment = () => {
         order_id: id,
         handler: async function (response) {
           const { payment_id } = response;
-          await axios.post("http://localhost:5000/api/payment/success", {
+          await axios.post("https://workportfolio-ngea.onrender.com/api/payment/success", {
             paymentId: payment_id,
             imageId,
             userEmail: "user@example.com",
