@@ -1,0 +1,77 @@
+/* Set the gradient background */
+.detail-container {
+  background: linear-gradient(45deg, #1e3c72, #2a5298, #6dd5ed, #2193b0);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 50px;
+  color: #fff; /* White text for contrast */
+  font-family: 'Arial', sans-serif;
+  position: relative;
+}
+
+/* Style for the image */
+.detail-img {
+  padding: 30px;
+  max-width: 80%;
+  max-height: 50vh;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.detail-img:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Title and Description */
+h2 {
+  font-size: 3rem;
+  margin: 10px 0;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+p {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Price */
+h3 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+/* Buy button */
+.buy-btn {
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  background-color: #ff5733;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.buy-btn:hover {
+  background-color: #ff3d1d;
+  transform: scale(1.05);
+}
+
+.buy-btn:focus {
+  outline: none;
+}
+
+/* Loading or error message */
+h2 {
+  font-size: 2rem;
+  font-weight: normal;
+  color: #ff3d1d; /* Red color for error messages */
+}

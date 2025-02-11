@@ -1,0 +1,132 @@
+/* Payment.css */
+
+/* General Styles */
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.payment-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.payment-details {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.product-img {
+  /* width: 250px;
+  height: 250px; */
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+}
+
+.product-info {
+  max-width: 600px;
+  margin-left: 20px;
+}
+
+.product-info h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.product-info p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.product-info h3 {
+  font-size: 22px;
+  color: #F37254;
+  font-weight: bold;
+}
+
+.payment-btn {
+  padding: 12px 30px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  background-color: #F37254;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  margin-top: 20px;
+}
+
+.payment-btn:hover {
+  background-color: #F1613D;
+  transform: scale(1.05);
+}
+
+.payment-btn:active {
+  transform: scale(0.98);
+}
+
+.payment-container:hover {
+  transform: translateY(-5px);
+}
+
+.payment-container .payment-details img {
+  transition: transform 0.3s ease;
+}
+
+.payment-container .payment-details img:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .payment-details {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .product-info h2 {
+    font-size: 24px;
+  }
+
+  .product-info p {
+    font-size: 14px;
+  }
+
+  .product-info h3 {
+    font-size: 20px;
+  }
+
+  .payment-btn {
+    width: 100%;
+    padding: 14px;
+  }
+}
