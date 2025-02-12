@@ -1,17 +1,18 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { motion } from "framer-motion"; // For animations
-import "../components/css/Payment.css"; // Assuming you have a separate CSS file for payment styles
+import { motion } from "framer-motion";
+import "../components/css/Payment.css";
 
 const Payment = () => {
   const location = useLocation();
-  const navigate = useNavigate(); // Get the navigate function
+  const navigate = useNavigate();
 
   const { imageId, amount, image } = location.state || {};
 
-  // Log to see if data is passed correctly
-  console.log("Location State:", location.state);
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPhone, setUserPhone] = useState("");
 
   if (!imageId || !amount || !image) {
     return <p>Error: Image not found or invalid amount</p>;
@@ -22,12 +23,13 @@ const Payment = () => {
       const response = await axios.post("https://workportfolio-ngea.onrender.com/api/payment", {
         amount,
       });
+
       const { id, currency, amount: razorpayAmount } = response.data;
 
       const options = {
         key: "rzp_test_Xkmmnp5DQoVyPn",
         amount: razorpayAmount,
-        currency: currency,
+        currency,
         name: "Your Business Name",
         description: "Payment for your selected image",
         image: "../../public/logo.jpg",
@@ -37,14 +39,19 @@ const Payment = () => {
           await axios.post("https://workportfolio-ngea.onrender.com/api/payment/success", {
             paymentId: payment_id,
             imageId,
-            userEmail: "user@example.com",
+            userName,
+            userEmail,
+            userPhone,
+            price: amount,
           });
-          navigate("/"); // Use navigate to go to the home page
+
+          navigate("/purchases");
           alert("Payment Successful!");
         },
         prefill: {
-          name: "User",
-          email: "user@example.com",
+          name: userName,
+          email: userEmail,
+          contact: userPhone,
         },
         theme: {
           color: "#F37254",
@@ -54,7 +61,7 @@ const Payment = () => {
       const razorpayInstance = new window.Razorpay(options);
       razorpayInstance.open();
     } catch (error) {
-      console.log("Payment initiation failed:", error);
+      console.error("Payment initiation failed:", error);
       alert("Error initiating payment.");
     }
   };
@@ -82,12 +89,35 @@ const Payment = () => {
         </div>
       </div>
 
+      <div className="user-details">
+        {[ 
+          { label: "Your Name", value: userName, setter: setUserName, type: "text" },
+          { label: "Your Email", value: userEmail, setter: setUserEmail, type: "email" },
+          { label: "Your Phone", value: userPhone, setter: setUserPhone, type: "tel" }
+        ].map(({ label, value, setter, type }, index) => (
+          <motion.div
+            key={index}
+            className="input-container"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
+          >
+            <input
+              type={type}
+              value={value}
+              onChange={(e) => setter(e.target.value)}
+              required
+            />
+            <label className={value ? "filled" : ""}>{label}</label>
+          </motion.div>
+        ))}
+      </div>
+
       <motion.button
         className="payment-btn"
         onClick={handlePayment}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        transition={{ duration: 0.2 }}
       >
         Proceed to Pay ₹{amount}
       </motion.button>
