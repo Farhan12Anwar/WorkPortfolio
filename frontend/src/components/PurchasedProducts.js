@@ -1,47 +1,73 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import "./css/PurchasedProducts.css";
+import "../components/css/PurchasedProducts.css";
+import Header from "./Header";
 
 const PurchasedProducts = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [purchases, setPurchases] = useState([]);
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    axios
-      .get("https://workportfolio-ngea.onrender.com/api/purchases")
-      .then((response) => {
-        console.log("Fetched purchases:", response.data);
-        setPurchases(response.data);
-      })
-      .catch((error) => console.error("Error fetching purchases:", error));
-  }, []);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/purchases/authenticate",
+        {
+          userEmail: email,
+          password: password,
+        }
+      );
+      setPurchases(response.data);
+    } catch (err) {
+      setError(err.response?.data?.message || "Authentication failed");
+    }
+  };
 
   return (
     <div className="purchased-products-container">
-      <h2>Your Purchased Products</h2>
-      {purchases.length === 0 ? (
-        <p>No purchases found.</p>
-      ) : (
-        <div className="purchases-list">
-          {purchases.map((purchase) => (
-            <div className="purchase-item" key={purchase._id}>
-              {purchase.imageId && purchase.imageId.url ? (
-                <img src={purchase.imageId.url} alt={purchase.imageId.title} />
-              ) : (
-                <p>Image not available</p>
-              )}
-              <div className="purchase-details">
-                <h3>{purchase.imageId?.title || "Unknown Title"}</h3>
-                <p>Purchased by: {purchase.userName}</p>
-                <p>Email: {purchase.userEmail}</p>
-                <p>Phone: {purchase.userPhone || "Not Provided"}</p>
-                <p>Price: ₹{purchase.price || "Not Available"}</p>
-                <p>Payment ID: {purchase._id}</p>
-                <p>Date: {new Date(purchase.timestamp).toLocaleString()}</p>
-              </div>
+        <Header />
+      <h2>Purchased Products</h2>
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Enter Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Login</button>
+      </form>
+      {error && <p className="error">{error}</p>}
+      <div className="purchases-list">
+        {purchases.length > 0 ? (
+          purchases.map((purchase) => (
+            <div key={purchase._id} className="purchase-item">
+              <img
+                className="img"
+                src={purchase.imageId.url}
+                alt={purchase.imageId.title}
+              />
+              <p>{purchase.imageId.title}</p>
+              <p>Price: ₹{purchase.price}</p>
+              <p>
+                Purchased on: {new Date(purchase.timestamp).toLocaleString()}
+              </p>
             </div>
-          ))}
-        </div>
-      )}
+          ))
+        ) : (
+          <p>No purchases found.</p>
+        )}
+      </div>
     </div>
   );
 };

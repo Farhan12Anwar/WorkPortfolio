@@ -1,41 +1,77 @@
 .purchased-products-container {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .purchases-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .purchase-item {
-    background: white;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 280px;
-    text-align: left;
-  }
-  
-  .purchase-item img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 5px;
-  }
-  
-  .purchase-details {
-    margin-top: 10px;
-  }
-  
-  .purchase-details p {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-  }
-  
+  padding: 20px;
+  text-align: center;
+}
+
+.purchases-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.purchase-item {
+  max-width: 300px; /* Define a fixed max-width for the card */
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  text-align: center;
+}
+
+.purchase-item img {
+  width: 100%;  /* Make the image fill the container width */
+  height: 200px; /* Set a fixed height */
+  object-fit: cover; /* Ensure the image maintains aspect ratio while filling the space */
+  border-radius: 5px;
+}
+
+.purchase-details {
+  margin-top: 15px;
+}
+
+.purchase-details p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+form {
+  padding: 30px;
+}
+
+form input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  padding: 10px;
+  width: 80%;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+.img {
+  max-width: 50vw;
+}

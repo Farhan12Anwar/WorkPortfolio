@@ -12,7 +12,7 @@ const ImageDetailPage = () => {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await fetch(`https://workportfolio-ngea.onrender.com/api/images/${id}`);
+        const response = await fetch(`http://localhost:5000/api/images/${id}`);
         const data = await response.json();
         setImage(data);
         setLoading(false);
