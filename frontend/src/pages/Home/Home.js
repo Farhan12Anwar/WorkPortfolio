@@ -12,7 +12,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/images"); // Fetch from backend
+        const response = await axios.get("https://workportfolio-ngea.onrender.com/api/images"); // Fetch from backend
         setImages(response.data);
       } catch (error) {
         console.error("Error fetching images:", error);

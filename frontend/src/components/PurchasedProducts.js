@@ -14,7 +14,7 @@ const PurchasedProducts = () => {
     setError("");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/purchases/authenticate",
+        "https://workportfolio-ngea.onrender.com/purchases/authenticate",
         {
           userEmail: email,
           password: password,

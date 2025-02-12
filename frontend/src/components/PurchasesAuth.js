@@ -11,7 +11,7 @@ const PurchasesAuth = () => {
 
   const handleAuth = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/purchases/authenticate", {
+      const response = await axios.post("https://workportfolio-ngea.onrender.com/api/purchases/authenticate", {
         userEmail,
         password,
       });
